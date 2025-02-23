@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCADA Security Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #alerts {
+            background-color: #f8d7da;
+            padding: 10px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .alert {
+            color: #721c24;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SCADA Security Simulation</h1>
+    <div id="alerts">
+        <h2>Alerts</h2>
+        <div id="alert-list"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Listen for alerts from the backend
+        socket.on('alert', function(data) {
+            const alertList = document.getElementById('alert-list');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert';
+            alertDiv.textContent = data.message;
+            alertList.appendChild(alertDiv);
+        });
+    </script>
+</body>
+</html>
